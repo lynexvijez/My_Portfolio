@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Personal Portfolio Website" />
+    <title>Felix Joshua Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #49516c 0%, #2f6972 100%);
+        color: #e7e9f0;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .top-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .top-buttons a {
+        font-size: 1.6rem;
+        background: rgba(34, 38, 58, 0.45);
+        border-radius: 50%;
+        padding: 0.5em 0.7em;
+        color: #a3ffe3;
+        text-decoration: none;
+        box-shadow: 0 2px 8px rgba(163, 255, 227, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        transition: background 0.3s, color 0.3s;
+      }
+
+      .top-buttons a:hover {
+        background: #a3ffe3;
+        color: #23263a;
+      }
+
+      header {
+        text-align: center;
+        padding: 2rem 1rem 1rem 1rem;
+      }
+
+      .profile-photo-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+      }
+
+      .profile-photo {
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        background: rgba(34, 38, 58, 0.45);
+        box-shadow: 0 4px 24px rgba(44, 50, 66, 0.18);
+        border: 2px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .side-photo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 2px 12px rgba(163, 255, 227, 0.18);
+        border: 2px solid rgba(255, 255, 255, 0.12);
+        animation: float 2.5s ease-in-out infinite;
+      }
+
+      .side-photo.left {
+        animation-delay: 0s;
+        margin-left: 150px; /* Push left image 150px from the left edge */
+      }
+      .side-photo.right {
+        animation-delay: 1.25s;
+        margin-right: 150px; /* Push right image 150px from the right edge */
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-18px);
+        }
+      }
+
+      header h1 {
+        font-size: 2rem;
+        color: #e6b7e1;
+        margin-bottom: 0.3rem;
+        letter-spacing: 2px;
+        text-shadow: 0 1px 4px #e6b7e1;
+      }
+
+      header p {
+        font-size: 1rem;
+        color: #b8b5d6;
+        margin-bottom: 1.5rem;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      nav a {
+        color: #e7e9f0;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0.5rem 1.2rem;
+        border-radius: 12px;
+        background: rgba(34, 38, 58, 0.35);
+        box-shadow: 0 2px 8px rgba(163, 255, 227, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: color 0.3s, background 0.3s, box-shadow 0.3s;
+        text-shadow: 0 1px 6px rgba(163, 255, 227, 0.12);
+        text-align: center;
+      }
+
+      nav a:hover {
+        color: #a3ffe3;
+        background: rgba(163, 255, 227, 0.18);
+        box-shadow: 0 4px 16px rgba(163, 255, 227, 0.22);
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      section {
+        background: rgba(34, 38, 58, 0.45);
+        box-shadow: 0 4px 24px rgba(44, 50, 66, 0.18);
+        border-radius: 18px;
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 2rem;
+      }
+
+      section h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #a3ffe3;
+        padding-bottom: 0.5rem;
+        color: #a3ffe3;
+        text-shadow: 0 2px 8px rgba(163, 255, 227, 0.12);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .project-card {
+        background: rgba(45, 49, 66, 0.55);
+        padding: 1rem;
+        border-left: 4px solid #e6b7e1;
+        border-radius: 12px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+        box-shadow: 0 2px 12px rgba(163, 255, 227, 0.12);
+        backdrop-filter: blur(8px) saturate(160%);
+        -webkit-backdrop-filter: blur(8px) saturate(160%);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 6px 24px rgba(163, 255, 227, 0.22);
+      }
+
+      footer {
+        color: #b8b5d6;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .contact p,
+      .about p {
+        margin-top: 1rem;
+      }
+
+      /* New styles for flipping squares */
+      .flip-square {
+        width: 120px;
+        height: 120px;
+        perspective: 800px;
+        margin: 0 0.2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(44, 50, 66, 0.18);
+        border: 2px solid rgba(255, 255, 255, 0.12);
+        background: rgba(34, 38, 58, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .flip-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: transform 0.7s cubic-bezier(0.4, 2, 0.3, 0.7);
+        transform-style: preserve-3d;
+      }
+
+      .flip-square:hover .flip-inner {
+        transform: rotateY(180deg);
+      }
+
+      /* Right square flips from left to right */
+      .flip-square.right .flip-inner {
+        /* Remove the default flip! */
+        transition: transform 0.7s cubic-bezier(0.4, 2, 0.3, 0.7);
+        transform-style: preserve-3d;
+      }
+
+      .flip-square.right:hover .flip-inner {
+        transform: rotateY(-180deg); /* Flip from left to right on hover */
+      }
+
+      .flip-front,
+      .flip-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        backface-visibility: hidden;
+      }
+
+      .flip-front {
+        z-index: 2;
+      }
+
+      /* Default: left square back face */
+      .flip-back {
+        transform: rotateY(180deg);
+        z-index: 1;
+      }
+
+      /* Right square back face: reverse direction */
+      .flip-square.right .flip-back {
+        transform: rotateY(-180deg);
+      }
+
+      @media (max-width: 900px) {
+        main {
+          padding: 2rem 0.5rem;
+        }
+        nav {
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-buttons">
+      <a href="mailto:lynexvijez.josh@gmail.com" title="Email">
+        <span>✉️</span>
+      </a>
+      <a href="https://github.com/lynexvijez" target="_blank" title="GitHub">
+        <span>🐙</span>
+      </a>
+      <a
+        href="https://www.linkedin.com/in/felix-joshua-momanyi/"
+        target="_blank"
+        title="LinkedIn"
+      >
+        <span>🔗</span>
+      </a>
+    </div>
+    <header>
+      <div class="profile-photo-row">
+        <img
+          class="side-photo left"
+          src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=facearea&w=80&h=80"
+          alt="Tech Left"
+        />
+        <!-- Flipping square left -->
+        <div class="flip-square">
+          <div class="flip-inner">
+            <img
+              class="flip-front"
+              src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=facearea&w=120&h=120"
+              alt="Tech Square Front Left"
+            />
+            <img
+              class="flip-back"
+              src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=facearea&w=120&h=120"
+              alt="Tech Square Back Left"
+            />
+          </div>
+        </div>
+        <div class="profile-photo">
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=400&h=400&facepad=2"
+            alt="Profile Photo"
+          />
+        </div>
+        <!-- Flipping square right -->
+        <div class="flip-square right">
+          <div class="flip-inner">
+            <img
+              class="flip-front"
+              src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=facearea&w=120&h=120"
+              alt="Tech Square Front Right"
+            />
+            <img
+              class="flip-back"
+              src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=120&h=120"
+              alt="Tech Square Back Right"
+            />
+          </div>
+        </div>
+        <img
+          class="side-photo right"
+          src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=facearea&w=80&h=80"
+          alt="Tech Right"
+        />
+      </div>
+      <h1>Felix Joshua</h1>
+      <p>Computer Science Student | Developer | Tech Enthusiast</p>
+    </header>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <main>
+      <section id="about" class="about">
+        <h2>About Me</h2>
+        <div style="font-size: 1.08rem; line-height: 1.8">
+          <p>
+            🌟 <strong>About Me</strong><br />
+            Hey there — I’m <strong>Felix Joshua</strong>, a passionate Computer
+            Science student at Mount Kenya University who thrives at the
+            intersection of curiosity, code, and creativity. I’m building my
+            path in tech with a clear mission: to solve real-world problems,
+            craft intelligent systems, and become a powerful voice in the global
+            tech scene.
+          </p>
+          <p>
+            🎓 <strong>From Self-Taught to Certified</strong><br />
+            My journey into tech began with relentless self-learning. I dove
+            into platforms like <strong>W3Schools</strong>, explored the core of
+            networking with <strong>Cisco Networking Academy</strong>, and
+            leveled up my digital skills through <strong>ALX</strong>, where I
+            earned certifications in AI Essentials and Virtual Assistance. These
+            experiences laid a rock-solid foundation for everything I build
+            today.
+          </p>
+          <p>🚀 <strong>What I Do</strong></p>
+          <ul style="margin-left: 1.2em">
+            <li>
+              💻 I design responsive, accessible websites using clean HTML, CSS,
+              and JavaScript.
+            </li>
+            <li>
+              🤖 I develop intelligent bots and explore AI-powered automation
+              tools.
+            </li>
+            <li>
+              📚 I offer high-quality academic writing, research support, and
+              proposal development.
+            </li>
+            <li>
+              🎥 I create tech-centered content across platforms like LinkedIn,
+              TikTok, and X.
+            </li>
+          </ul>
+          <p>
+            🌍 <strong>Vision & Mission</strong><br />
+            My goal is to become an international tech influencer — someone who
+            doesn’t just write code but also creates conversations, leads
+            innovation, and opens doors for others. I’m deeply inspired by the
+            power of community, learning, and staying ahead in the ever-evolving
+            tech landscape.
+          </p>
+          <p>
+            ⚙️ <strong>Tools I Love</strong><br />
+            HTML, CSS, Java, Python, SQL, Git, Canva — and any tool that
+            transforms a concept into something that works, looks great, and
+            solves a real problem.
+          </p>
+          <blockquote
+            style="
+              margin: 1.5em 0 0 0;
+              padding-left: 1em;
+              border-left: 3px solid #a3ffe3;
+              color: #b8b5d6;
+              font-style: italic;
+            "
+          >
+            “I believe the best developers aren’t just builders — they’re
+            learners, leaders, and listeners.”
+          </blockquote>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3>Inventory Management System</h3>
+            <p>
+              A simple system for tracking stock levels and generating alerts in
+              real time.
+            </p>
+          </div>
+          <div class="project-card">
+            <h3>Portfolio Website</h3>
+            <p>
+              Responsive personal portfolio built with HTML and CSS showcasing
+              my skills.
+            </p>
+          </div>
+          <div class="project-card">
+            <h3>Academic Writing Bot</h3>
+            <p>
+              A tool that helps generate structured essay drafts for academic
+              work.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="skills">
+        <h2>Skills</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem">
+          <div style="flex: 1; min-width: 220px">
+            <h3 style="color: #a3ffe3; margin-bottom: 0.5em">
+              Languages &amp; Tools
+            </h3>
+            <ul style="margin-left: 1.2em">
+              <li>HTML, CSS, Java, Python</li>
+              <li>Git &amp; GitHub, SQL, Canva, InVideo AI</li>
+              <li>Basics of AI Tools (ChatGPT, Sora, etc.)</li>
+            </ul>
+          </div>
+          <div style="flex: 1; min-width: 220px">
+            <h3 style="color: #a3ffe3; margin-bottom: 0.5em">Soft Skills</h3>
+            <ul style="margin-left: 1.2em">
+              <li>Self-driven learner</li>
+              <li>Time management</li>
+              <li>Research writing &amp; editing</li>
+              <li>Communication &amp; teamwork</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="certifications" class="certifications">
+        <h2>Certifications</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem">
+          <div
+            style="
+              flex: 1;
+              min-width: 180px;
+              background: rgba(45, 49, 66, 0.55);
+              border-radius: 12px;
+              padding: 1rem;
+              box-shadow: 0 2px 12px rgba(163, 255, 227, 0.12);
+              border-left: 4px solid #a3ffe3;
+              display: flex;
+              align-items: center;
+              gap: 0.8em;
+            "
+          >
+            <span style="font-size: 1.5em">🎓</span>
+            <div>
+              <strong>ALX AI Essentials</strong><br />
+              <span style="color: #b8b5d6">2024</span>
+            </div>
+          </div>
+          <div
+            style="
+              flex: 1;
+              min-width: 180px;
+              background: rgba(45, 49, 66, 0.55);
+              border-radius: 12px;
+              padding: 1rem;
+              box-shadow: 0 2px 12px rgba(163, 255, 227, 0.12);
+              border-left: 4px solid #a3ffe3;
+              display: flex;
+              align-items: center;
+              gap: 0.8em;
+            "
+          >
+            <span style="font-size: 1.5em">🧑‍💻</span>
+            <div>
+              <strong>ALX Virtual Assistant</strong><br />
+              <span style="color: #b8b5d6">2024</span>
+            </div>
+          </div>
+          <div
+            style="
+              flex: 1;
+              min-width: 180px;
+              background: rgba(45, 49, 66, 0.55);
+              border-radius: 12px;
+              padding: 1rem;
+              box-shadow: 0 2px 12px rgba(163, 255, 227, 0.12);
+              border-left: 4px solid #a3ffe3;
+              display: flex;
+              align-items: center;
+              gap: 0.8em;
+            "
+          >
+            <span style="font-size: 1.5em">🌐</span>
+            <div>
+              <strong>Cisco Networking Academy</strong><br />
+              <span style="color: #b8b5d6">Intro to Networking</span>
+            </div>
+          </div>
+          <div
+            style="
+              flex: 1;
+              min-width: 180px;
+              background: rgba(45, 49, 66, 0.55);
+              border-radius: 12px;
+              padding: 1rem;
+              box-shadow: 0 2px 12px rgba(163, 255, 227, 0.12);
+              border-left: 4px solid #a3ffe3;
+              display: flex;
+              align-items: center;
+              gap: 0.8em;
+            "
+          >
+            <span style="font-size: 1.5em">💻</span>
+            <div>
+              <strong>W3Schools Courses</strong><br />
+              <span style="color: #b8b5d6">Web Development Fundamentals</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <p>
+          Email:
+          <a
+            href="mailto:lynexvijez.josh@gmail.com"
+            style="color: #a3ffe3; text-decoration: underline"
+            >lynexvijez.josh@gmail.com</a
+          >
+        </p>
+        <p>
+          GitHub:
+          <a
+            href="https://github.com/lynexvijez"
+            target="_blank"
+            style="color: #a3ffe3; text-decoration: underline"
+            >github.com/lynexvijez</a
+          >
+        </p>
+        <p>
+          LinkedIn:
+          <a
+            href="https://www.linkedin.com/in/felix-joshua-momanyi/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BHPalRM7eTrylKTy6XZTm8w%3D%3D"
+            target="_blank"
+            style="color: #a3ffe3; text-decoration: underline"
+          >
+            linkedin.com/in/felix-joshua-momanyi
+          </a>
+        </p>
+      </section>
+      <footer>
+        <p>&copy; 2025 Felix Joshua. All rights reserved.</p>
+      </footer>
+    </main>
+  </body>
+</html>
